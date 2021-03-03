@@ -11,50 +11,47 @@
 
 <body class="text-white" style="background-color: rgb(54, 17, 0)">
   <div class="container-fluid">
-    <div class="jumbotron text-center" style="background-image: url(https://wallpaperaccess.com/full/502138.jpg); height: 500px; background-position: center">
+    <div class="jumbotron text-center" style="background-image: url(https://wallpaperaccess.com/full/502138.jpg); height: 200px; background-position-y: 800px; background-position-x: center">
       <h1 class="display-3"><b>Mission to Mars</b></h1>
       <p><a class="btn btn-warning btn-lg" href="/scrape" role="button">Scrape Data</a></p>
     </div>
     <!-- News -->
-    <div class="container">
+    <div class="container" style="margin-top: 40px;">
       <div class="row">
-        <div class="media">
-          <div class="col-lg-12">
-            <h2>Mars News</h2>
-            <h4 style="color: #ff9100">{{ mars_scrape.news_title }}</h4>
-            <p style="color: #ff5e00">{{ mars_scrape.news_paragraph }}</p>
-          </div>
+        <div class="col-lg-3">
+          <h2 style="text-align: center">Mars News</h2>
+          <h4 style="color: #ff9100">{{ mars_scrape.news_title }}</h4>
+          <p style="color: #ff5e00">{{ mars_scrape.news_paragraph }}</p>
         </div>
-      </div>
-    </div>   
-    <hr>
-    <!-- Image -->
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h2>Featured Mars Image</h2>
-          <img src="{{ scrape_mars.featured_image_url }}" class="img-responsive" style="max-width:100%; max-height: auto;" alt="Mars Featured Image"/>
+        <!-- Image -->
+        <div class="col-lg-6">
+          <h2 style="text-align: center">Featured Mars Image</h2>
+          <img src="{{ mars_scrape.featured_image_url }}" class="img-responsive" style="max-width:100%; max-height: auto;" alt="Mars Featured Image"/>
         </div>
-      </div>
-    </div>
-    <hr>
-        <!-- Facts -->    
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h2>Mars Facts</h2>
-          {{ mars_scrape.facts_table }}
+        <!-- Facts -->
+        <div class="col-lg-3">
+          <h2 style="text-align: center;">Mars Facts</h2>
+          {{ mars_scrape.facts_table | safe }}
         </div>
       </div>
     </div>
-    <div class="container">
     <hr>
+    <div class="container">
     <!-- Hemispheres -->
-    <h2>Mars Hemispheres</h2>
+    <h2 style="text-align: center">Mars Hemispheres</h2>
     <div class="card-deck">
-      <div class="col-md-12">
+      <div class="col-lg-12">
         <div class="row">
-          <p class="card-text">{{ mars_scrape.hemispheres }}</p>
+          {% for h in mars_scrape.hemispheres %}
+          <div class="col-lg-3">
+            <div class="card text-dark bg-warning mb-3">
+              <img class="card-img-top" src="{{ h.img_url }}" alt="Hemisphere Image">
+              <div class="card-body">
+                <p class="card-text">{{ h.title }}</p>
+              </div>  
+            </div>
+          </div>
+          {% endfor %} 
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import requests
 import pymongo
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
+import time
 
 def init_browser():
     # Setting up Chrome path
@@ -20,6 +21,9 @@ def scrape():
     # Creating url variable and using BeautifulSoup to obtain webpage data
     nasa_news_url = 'https://mars.nasa.gov/news/'
     browser.visit(nasa_news_url)
+
+    time.sleep(1)
+
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
 
